@@ -44,7 +44,7 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
     private Uri photoURI;
     private ZoomLayout zoom;
     List<Point> circlepoints;
-    TextFrameLayout txtfrmlayout;
+   // TextFrameLayout txtfrmlayout;
     private double result;
     Bundle extras;
 
@@ -64,7 +64,6 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
         btn_clrRed = findViewById(R.id.clearref);
 
         //preview.addView(txtfrmlayout);
-
 
         addPictureButton();
 
