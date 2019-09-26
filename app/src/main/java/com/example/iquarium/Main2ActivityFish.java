@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -43,8 +44,11 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
     private Uri photoURI;
     private ZoomLayout zoom;
     List<Point> circlepoints;
+    TextFrameLayout txtfrmlayout;
     private double result;
     Bundle extras;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,9 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
         btn_ok = (Button) findViewById(R.id.button_calculate);
         btn_cancel = (Button) findViewById(R.id.button_cancel);
         btn_clrRed = findViewById(R.id.clearref);
+
+        //preview.addView(txtfrmlayout);
+
 
         addPictureButton();
 
