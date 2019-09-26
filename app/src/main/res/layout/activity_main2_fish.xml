@@ -3,7 +3,7 @@
 
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:background="@drawable/backgroundlandscape"
+    android:background="@drawable/landscape2"
     android:layout_height="fill_parent"
     >
 

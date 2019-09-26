@@ -1,15 +1,19 @@
 package com.example.iquarium;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -43,6 +47,7 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
     private File photoFile;
     private Uri photoURI;
     private ZoomLayout zoom;
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
     List<Point> circlepoints;
    // TextFrameLayout txtfrmlayout;
     private double result;
@@ -63,15 +68,14 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
         btn_cancel = (Button) findViewById(R.id.button_cancel);
         btn_clrRed = findViewById(R.id.clearref);
 
-        //preview.addView(txtfrmlayout);
-
         addPictureButton();
+        requestRead();
 
         btn_takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent();
-                //dispatchChoosePhotoIntent();
+               dispatchTakePictureIntent();
+              //  dispatchChoosePhotoIntent();
             }
         });
 
@@ -163,21 +167,19 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 try {
-                   /*
+
                     photoURI = FileProvider.getUriForFile(this, "com.example.iquarium.fileprovider", photoFile);
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                             photoURI);
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-
-                    */
-
+/*
                     StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                     StrictMode.setVmPolicy(builder.build());
 
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                             Uri.fromFile(photoFile));
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-
+*/
                 }catch (Exception e){
                     toasMessage(e.toString());
                     return;
@@ -215,7 +217,6 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
 
         drawView = new DrawView(this);
         preview.addView(drawView);
-
 
 
     }
@@ -292,13 +293,23 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
 
     private void dispatchChoosePhotoIntent(){
 
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+
         startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.action_choosePhoto)), REQUEST_SELECT_PHOTO);
+    }
+
+    public void requestRead() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+        } else {
+        }
     }
 
     @Override
