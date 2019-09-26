@@ -42,7 +42,7 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
     private FrameLayout preview;
     private Button btn_ok;
     private Button btn_cancel;
-    private Button btn_takePicture;
+    private Button btn_takePicture, btn_choosephoto;
     private Button btn_clrRed;
     private File photoFile;
     private Uri photoURI;
@@ -53,16 +53,15 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
     private double result;
     Bundle extras;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2_fish);
 
-        preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview = findViewById(R.id.camera_preview);
         zoom = new ZoomLayout(this);
 
+        btn_choosephoto = findViewById(R.id.button_choosePicture);
         btn_takePicture = (Button) findViewById(R.id.button_takePicture);
         btn_ok = (Button) findViewById(R.id.button_calculate);
         btn_cancel = (Button) findViewById(R.id.button_cancel);
@@ -75,7 +74,6 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
             @Override
             public void onClick(View v) {
                dispatchTakePictureIntent();
-              //  dispatchChoosePhotoIntent();
             }
         });
 
@@ -84,6 +82,13 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
             public void onClick(View v) {
                 new InputDialog().show(getFragmentManager(), "input_dialog");
 
+            }
+        });
+
+        btn_choosephoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchChoosePhotoIntent();
             }
         });
 
@@ -200,6 +205,7 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
         btn_ok.setVisibility(View.GONE);
         btn_clrRed.setVisibility(View.GONE);
         btn_takePicture.setVisibility(View.VISIBLE);
+        btn_choosephoto.setVisibility(View.VISIBLE);
     }
 
     private void pictureTaken(){
@@ -208,16 +214,22 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
         btn_cancel.setVisibility(View.VISIBLE);
      //   btn_ok.setVisibility(View.VISIBLE);
         btn_takePicture.setVisibility(View.GONE);
+        btn_choosephoto.setVisibility(View.GONE);
         btn_clrRed.setVisibility(View.VISIBLE);
 
         ImageSurface image = new ImageSurface(this, photoFile);
         preview.addView(image);
 
+        try{
+            preview.addView(zoom);
+        }catch (Exception e){
+            toasMessage(e.toString());
+        }
+
         ((TextView) findViewById(R.id.info_lbl)).setText(getResources().getString(R.string.setReferencePoints));
 
         drawView = new DrawView(this);
         preview.addView(drawView);
-
 
     }
 
@@ -237,6 +249,7 @@ public class Main2ActivityFish extends AppCompatActivity implements InputDialog.
             }
 
         }
+
         return false;
     }
 

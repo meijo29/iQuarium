@@ -72,6 +72,15 @@
             android:visibility="gone"
             android:text="@string/btn_takePicture"/>
 
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/button_choosePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/button_takePicture"
+            android:visibility="gone"
+            android:text="CHOOSE PHOTO"/>
+
     </RelativeLayout>
 
 </LinearLayout>
