@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/background2"
+    android:background="@mipmap/background2"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
@@ -14,7 +14,7 @@
         android:layout_height="636dp"
 
         android:layout_marginTop="69dp"
-        android:background="#c8e3f0"
+
         android:clipToPadding="false"
         android:paddingTop="10dp"
         android:paddingBottom="50dp" />

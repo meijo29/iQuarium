@@ -45,7 +45,6 @@ public class DrawView extends SurfaceView {
         int size = circlePoints.size();
         for(int i = 0; i < size; i++){
 
-
             //Set color based on order. First 2 points are the reference points.
             if(i < 2) paint.setColor(REFERENCE_POINT_COLOR);
             else paint.setColor(MEASURE_POINT_COLOR);
@@ -86,19 +85,23 @@ public class DrawView extends SurfaceView {
     public void clearCanvasRed(){
         //circlePoints.clear();
      try {
-         circlePoints.remove(3);
-         circlePoints.remove(2);
+        if(circlePoints.size() == 4) {
+            circlePoints.remove(3);
+            circlePoints.remove(2);
+        }
+        else if(circlePoints.size() == 3){
+            circlePoints.remove(2);
+        }
      }catch (Exception e){
        //  toasMessage(e.toString());
      }
-        ((TextView) ((Activity)context).findViewById(R.id.info_lbl)).setText(getResources().getString(R.string.setMeasurePoints));
+
         invalidate();
     }
 
     public void clearCanvas(){
         circlePoints.clear();
 
-        ((TextView) ((Activity)context).findViewById(R.id.info_lbl)).setText(getResources().getString(R.string.setMeasurePoints));
         invalidate();
     }
 

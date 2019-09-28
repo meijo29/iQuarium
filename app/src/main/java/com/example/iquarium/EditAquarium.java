@@ -149,6 +149,15 @@ public class EditAquarium extends AppCompatActivity {
                         }
                         else {
                             textph = Float.parseFloat(ph.getText().toString());
+
+                            if(textph < 5 && textph != 0){
+                                toasMessage("The minimum aquarium pH level is 5");
+                                return;
+                            }
+                            else if(textph > 9 && textph != 0){
+                                toasMessage("The maximum aquarium pH level is 9");
+                                return;
+                            }
                         }
 
                         if(temp.getText().toString().matches("")){
@@ -156,6 +165,15 @@ public class EditAquarium extends AppCompatActivity {
                         }
                         else{
                             texttemp = Float.parseFloat(temp.getText().toString());
+
+                            if(texttemp < 20 && texttemp != 0){
+                                toasMessage("The mimimum aquarium temperature is 20");
+                                return;
+                            }
+                            else if(texttemp > 33 && texttemp != 0){
+                                toasMessage("The maximum aquarium temperature is 33");
+                            }
+
                         }
 
                         if (!data.getString(1).equalsIgnoreCase(name.getText().toString()) || data.getFloat(6) != textph
@@ -233,43 +251,54 @@ public class EditAquarium extends AppCompatActivity {
                 }
             }
 
-          if(!length.getText().toString().matches("") || !width.getText().toString().matches("") || !height.getText().toString().matches("")) {
-              if (length.getText().toString().matches("")) {
-                  Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
-                  return;
+            if(!length.getText().toString().matches("") || !width.getText().toString().matches("") || !height.getText().toString().matches(""))
+                   {
 
-              }  else if (width.getText().toString().matches("")) {
-                  Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
-                  return;
-              } else if (height.getText().toString().matches("")) {
-                  Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(length.getText().toString()) < 12){
-                  Toast.makeText(EditAquarium.this, "The minimum aquarium length is 12 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(width.getText().toString()) < 6){
-                  Toast.makeText(EditAquarium.this, "The minimum aquarium width is 6 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(height.getText().toString()) < 8){
-                  Toast.makeText(EditAquarium.this, "The minimum aquarium height is 8 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(length.getText().toString()) > 72){
-                  Toast.makeText(EditAquarium.this, "The maximum aquarium length is 72 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(width.getText().toString()) > 24){
-                  Toast.makeText(EditAquarium.this, "The maximum aquarium width is 24 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
-              else if(Float.parseFloat(height.getText().toString()) > 25){
-                  Toast.makeText(EditAquarium.this, "The maximum aquarium height is 25 inches", Toast.LENGTH_LONG).show();
-                  return;
-              }
+                if (length.getText().toString().matches("")) {
 
+                    Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (width.getText().toString().matches("")) {
+                    Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (height.getText().toString().matches("")) {
+                    Toast.makeText(EditAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(length.getText().toString()) < 5){
+                    Toast.makeText(EditAquarium.this, "The minimum aquarium length is 12 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(width.getText().toString()) < 5){
+                    Toast.makeText(EditAquarium.this, "The minimum aquarium width is 6 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(height.getText().toString()) < 5){
+                    Toast.makeText(EditAquarium.this, "The minimum aquarium height is 8 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(length.getText().toString()) > 200){
+                    Toast.makeText(EditAquarium.this, "The maximum aquarium length is 200 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(width.getText().toString()) > 200){
+                    Toast.makeText(EditAquarium.this, "The maximum aquarium width is 200 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(Float.parseFloat(height.getText().toString()) > 200){
+                    Toast.makeText(EditAquarium.this, "The maximum aquarium height is 200 inches", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+              float gal = 0;
+              float volume = 0;
+              volume = Float.parseFloat(length.getText().toString()) * Float.parseFloat(width.getText().toString()) * Float.parseFloat(height.getText().toString());
+              gal = volume / 231;
+
+              if(gal > 180){
+                  toasMessage("The maximum aquarium size is only 180 gallons");
+                  return;
+              }
 
           }
             EditConfirm();

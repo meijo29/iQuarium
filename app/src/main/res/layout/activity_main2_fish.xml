@@ -3,7 +3,7 @@
 
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:background="@drawable/landscape2"
+    android:background="@mipmap/landscape3"
     android:layout_height="fill_parent"
     >
 
@@ -20,20 +20,42 @@
 
     <RelativeLayout
         android:id="@+id/input_area"
+        android:background="#c8e3f0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 
-        <Button
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/zoom"
+            android:layout_toLeftOf="@+id/clearref"
+            android:id="@+id/zoombttn"
+        ></ImageButton>
+
+        <ImageButton
+            android:id="@+id/backbutton"
+            android:layout_width="40dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/leftarrow"
+
+            ></ImageButton>
+
+        <ImageButton
             android:id="@+id/clearref"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="6dp"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/redlineeraser"
             android:layout_toLeftOf="@+id/button_cancel"
-            android:text="CLEAR RED LINE"
-            android:textSize="8sp" />
+
+            ></ImageButton>
 
         <TextView
             android:id="@+id/info_lbl"
@@ -41,45 +63,53 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/backbutton"
             android:text="@string/setPicture"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_calculate"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="6dp"
-            android:layout_toLeftOf="@+id/clearref"
-            android:text="OK" />
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/pencil"
+            android:layout_toLeftOf="@+id/zoombttn"
+            ></ImageButton>
 
-        <Button
+
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/redandyellowlineeraser"
             android:id="@+id/button_cancel"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="CLEAR BOTH LINE"
-            android:textSize="8sp" />
+            ></ImageButton>
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
+
+        <ImageButton
             android:id="@+id/button_takePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/photocamera"
             android:visibility="gone"
-            android:text="@string/btn_takePicture"/>
+            ></ImageButton>
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:id="@+id/button_choosePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/button_takePicture"
+            android:background="@drawable/photogallery"
             android:visibility="gone"
-            android:text="CHOOSE PHOTO"/>
+            android:id="@+id/button_choosePicture"
+            ></ImageButton>
 
     </RelativeLayout>
 

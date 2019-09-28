@@ -29,6 +29,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Chatbot"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
              android:theme="@style/ChatBackground"
                    />
         <activity
@@ -78,6 +79,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 

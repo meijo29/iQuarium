@@ -112,28 +112,39 @@ public class CreateAquarium extends AppCompatActivity {
                         Toast.makeText(CreateAquarium.this, "Please fill the remaining measurement", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(length.getText().toString()) < 12){
+                    else if(Float.parseFloat(length.getText().toString()) < 5){
                         Toast.makeText(CreateAquarium.this, "The minimum aquarium length is 12 inches", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(width.getText().toString()) < 6){
+                    else if(Float.parseFloat(width.getText().toString()) < 5){
                         Toast.makeText(CreateAquarium.this, "The minimum aquarium width is 6 inches", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(height.getText().toString()) < 8){
+                    else if(Float.parseFloat(height.getText().toString()) < 5){
                         Toast.makeText(CreateAquarium.this, "The minimum aquarium height is 8 inches", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(length.getText().toString()) > 72){
-                        Toast.makeText(CreateAquarium.this, "The maximum aquarium length is 72 inches", Toast.LENGTH_LONG).show();
+                    else if(Float.parseFloat(length.getText().toString()) > 200){
+                        Toast.makeText(CreateAquarium.this, "The maximum aquarium length is 200 inches", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(width.getText().toString()) > 24){
-                        Toast.makeText(CreateAquarium.this, "The maximum aquarium width is 24 inches", Toast.LENGTH_LONG).show();
+                    else if(Float.parseFloat(width.getText().toString()) > 200){
+                        Toast.makeText(CreateAquarium.this, "The maximum aquarium width is 200 inches", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    else if(Float.parseFloat(height.getText().toString()) > 25){
-                        Toast.makeText(CreateAquarium.this, "The maximum aquarium height is 25 inches", Toast.LENGTH_LONG).show();
+                    else if(Float.parseFloat(height.getText().toString()) > 200){
+                        Toast.makeText(CreateAquarium.this, "The maximum aquarium height is 200 inches", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+
+                    float gal = 0;
+                    float volume = 0;
+                    volume = Float.parseFloat(length.getText().toString()) * Float.parseFloat(width.getText().toString()) * Float.parseFloat(height.getText().toString());
+                    gal = volume / 231;
+
+                    if(gal > 180){
+                        toasMessage("The maximum aquarium size is only 180 gallons");
                         return;
                     }
 
@@ -145,6 +156,30 @@ public class CreateAquarium extends AppCompatActivity {
                     return;
                 }
 
+                 if(!pH.getText().toString().matches("")) {
+
+                    if (Float.parseFloat(pH.getText().toString()) > 9 && Float.parseFloat(pH.getText().toString()) != 0) {
+                        Toast.makeText(CreateAquarium.this, "The maximum aquarium ph Level is 9", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    else if (Float.parseFloat(pH.getText().toString()) < 5 && Float.parseFloat(pH.getText().toString()) != 0) {
+                        Toast.makeText(CreateAquarium.this, "The minimum aquarium ph Level is 5", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+
+                 if(!temp.getText().toString().matches("")) {
+                     if (Float.parseFloat(temp.getText().toString()) > 33 && Float.parseFloat(temp.getText().toString()) != 0) {
+                         Toast.makeText(CreateAquarium.this, "The maximum aquarium water temperature is 33", Toast.LENGTH_LONG).show();
+                         return;
+                     }
+                     else if(Float.parseFloat(temp.getText().toString()) < 20 && Float.parseFloat(temp.getText().toString()) != 0){
+                         Toast.makeText(CreateAquarium.this, "The minimum aquarium water temperature is 20", Toast.LENGTH_LONG).show();
+                         return;
+                     }
+                 }
+
+
                 boolean isInserted = myDb.insertData(name.getText().toString(), length.getText().toString(), width.getText().toString(), height.getText().toString(), pH.getText().toString(),
                 temp.getText().toString());
 
@@ -155,10 +190,8 @@ public class CreateAquarium extends AppCompatActivity {
                 } else {
                     Toast.makeText(CreateAquarium.this, "Data not Inserted", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
-
 
     }
 

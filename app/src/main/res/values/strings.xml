@@ -6,7 +6,7 @@
     <string name="input_hint">Reference length and unit</string>
     <string name="setReferencePoints">Select reference points</string>
     <string name="setMeasurePoints">Select measurement points</string>
-    <string name="setScaleValue">Tap OK to enter the reference length</string>
+    <string name="setScaleValue">Tap the pencil icon to set reference length</string>
     <string name="setPicture">Take a photo</string>
     <string name="btn_clear">Clear</string>
     <string name="error_noPoints">Please tap on the screen to select the points</string>

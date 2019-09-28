@@ -90,13 +90,17 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
 
                 if ((mode == Mode.DRAG && scale >= MIN_ZOOM) || mode == Mode.ZOOM) {
                     getParent().requestDisallowInterceptTouchEvent(true);
-                    float maxDx = child().getWidth() * (scale - 1);  // adjusted for zero pivot
-                    float maxDy = child().getHeight() * (scale - 1);  // adjusted for zero pivot
+                    View v = (View) getParent();
+                    Log.i(TAG, "onTouch: " + getParent());
+                    Log.i(TAG, "onTouch: WIDTH "+ v.getWidth());
+                    Log.i(TAG, "onTouch: HEIGHT "+ v.getHeight());
+                    float maxDx = v.getWidth() * (scale - 1);  // adjusted for zero pivot
+                    float maxDy = v.getHeight() * (scale - 1);  // adjusted for zero pivot
                     dx = Math.min(Math.max(dx, -maxDx), 0);  // adjusted for zero pivot
                     dy = Math.min(Math.max(dy, -maxDy), 0);  // adjusted for zero pivot
-                    Log.i(TAG, "Width: " + child().getWidth() + ", scale " + scale + ", dx " + dx
+                    Log.i(TAG, "Width: " + v.getWidth() + ", scale " + scale + ", dx " + dx
                             + ", max " + maxDx);
-                    applyScaleAndTranslation();
+                    applyScaleAndTranslation(v);
                 }
 
                 return true;
@@ -141,16 +145,19 @@ public class ZoomLayout extends FrameLayout implements ScaleGestureDetector.OnSc
         Log.i(TAG, "onScaleEnd");
     }
 
-    private void applyScaleAndTranslation() {
-        child().setScaleX(scale);
-        child().setScaleY(scale);
-        child().setPivotX(0f);  // default is to pivot at view center
-        child().setPivotY(0f);  // default is to pivot at view center
-        child().setTranslationX(dx);
-        child().setTranslationY(dy);
+    private void applyScaleAndTranslation(View v) {
+        v.setScaleX(scale);
+        v.setScaleY(scale);
+        v.setPivotX(0f);  // default is to pivot at view center
+        v.setPivotY(0f);  // default is to pivot at view center
+        v.setTranslationX(dx);
+        v.setTranslationY(dy);
     }
 
     private View child() {
-        return getChildAt(0);
+
+            return getChildAt(0);
+
     }
+
 }
